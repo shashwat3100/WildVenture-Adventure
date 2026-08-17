@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WildVenture - Adventure Camping & Glamping Platform</title>
-  <meta name="description" content="Book pristine wilderness camping, luxury glamping domes, alpine survival treks, and high-performance camping gear directly from verified outdoor contractors.">
+  <meta name="description" content="Book pristine wilderness camping, luxury glamping domes, alpine survival treks, tourist packages, and high-performance camping gear directly from verified outdoor contractors.">
   
   <!-- Google Fonts: Syne & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,12 +57,16 @@
 
       <nav class="main-nav" id="main-nav-menu">
         <a href="#campsites-section" class="nav-link">Campsites & Treks</a>
+        <a href="tourist-packages.html" class="nav-link">Tourist Packages</a>
         <a href="#gear-section" class="nav-link">Gear Rental</a>
         <a href="#user-bookings-section" class="nav-link">My Bookings</a>
         <a href="#contractor-info-section" class="nav-link">For Contractors</a>
       </nav>
 
       <div class="header-actions">
+        <a class="btn btn-outline btn-sm" href="tourist-packages.html">
+          <i class="ph ph-map-trifold"></i> Packages
+        </a>
         <button class="btn btn-outline btn-sm" onclick="App.switchRole('user'); document.getElementById('user-bookings-section')?.scrollIntoView({behavior:'smooth'})">
           <i class="ph ph-ticket"></i> Passes
         </button>
@@ -86,7 +90,7 @@
           </div>
           <h1 class="hero-title">Unplug From Noise. Reconnect With The Wild.</h1>
           <p class="hero-subtitle">
-            Book verified off-grid campsites, glamping domes, high-altitude alpine treks, and rent professional gear directly from certified wilderness contractors.
+            Book verified off-grid campsites, curated tourist packages, luxury glamping domes, high-altitude alpine treks, and rent professional gear directly from certified wilderness contractors.
           </p>
 
           <!-- Search Floating Bar -->
@@ -356,242 +360,102 @@
 
         <!-- Contractor KYC Verification Queue -->
         <div class="data-card">
-          <div class="data-card-header">
-            <h3><i class="ph ph-user-check"></i> Contractor KYC & Safety Compliance Queue</h3>
-            <span class="text-muted small">Verify licenses and wilderness safety audits</span>
-          </div>
+          <div class="data-card-header"><h3><i class="ph ph-identification-card"></i> Contractor KYC Verification Queue</h3></div>
           <div class="table-responsive">
             <table class="custom-table">
-              <thead>
-                <tr>
-                  <th>Contractor & Lead</th>
-                  <th>License ID</th>
-                  <th>Service Zone</th>
-                  <th>KYC Status</th>
-                  <th>Safety Audit</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="admin-contractor-kyc-table">
-                <!-- JS Populated -->
-              </tbody>
+              <thead><tr><th>Contractor</th><th>License</th><th>Service Region</th><th>Status</th><th>Safety Audit</th><th>Actions</th></tr></thead>
+              <tbody id="admin-contractor-kyc-table"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- Payment Gateway Master Transaction Ledger -->
+        <!-- Transactions Table -->
         <div class="data-card">
-          <div class="data-card-header">
-            <h3><i class="ph ph-credit-card"></i> Payment Gateway Master Ledger</h3>
-            <span class="badge badge-success">Gateway Live & Healthy</span>
-          </div>
+          <div class="data-card-header"><h3><i class="ph ph-receipt"></i> Platform Transaction Ledger</h3></div>
           <div class="table-responsive">
             <table class="custom-table">
-              <thead>
-                <tr>
-                  <th>Txn ID</th>
-                  <th>Booking ID</th>
-                  <th>Customer</th>
-                  <th>Timestamp</th>
-                  <th>Amount</th>
-                  <th>Platform Fee</th>
-                  <th>Method</th>
-                  <th>Status</th>
-                  <th>Refund Control</th>
-                </tr>
-              </thead>
-              <tbody id="admin-transactions-table">
-                <!-- JS Populated -->
-              </tbody>
+              <thead><tr><th>Transaction</th><th>Booking</th><th>Customer</th><th>Date</th><th>Amount</th><th>Platform Cut</th><th>Gateway</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="admin-transactions-table"></tbody>
             </table>
           </div>
         </div>
-
-        <!-- Listing Moderation Table -->
-        <div class="data-card">
-          <div class="data-card-header">
-            <h3><i class="ph ph-tree-evergreen"></i> Campsite & Trek Experience Moderation</h3>
-          </div>
-          <div class="table-responsive">
-            <table class="custom-table">
-              <thead>
-                <tr>
-                  <th>Listing Title</th>
-                  <th>Contractor</th>
-                  <th>Price/N</th>
-                  <th>Status</th>
-                  <th>Feature / Publish</th>
-                </tr>
-              </thead>
-              <tbody id="admin-moderation-table">
-                <!-- JS Populated -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
       </div>
     </div>
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="brand-logo" style="color:#fff; margin-bottom:1rem;">
-          <i class="ph ph-campfire"></i> WildVenture
-        </a>
-        <p>A next-generation adventure camping ecosystem empowering local wilderness contractors, outdoor guides, and avid travelers.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#" onclick="App.switchRole('user')">Wilderness Camps</a></li>
-          <li><a href="#" onclick="App.switchRole('user')">Glamping Domes</a></li>
-          <li><a href="#" onclick="App.switchRole('user')">Survival Treks</a></li>
-          <li><a href="#" onclick="App.switchRole('user')">Gear Vault</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>E-Contractors</h4>
-        <ul>
-          <li><a href="#" onclick="App.switchRole('contractor')">Contractor Portal</a></li>
-          <li><a href="#" onclick="App.switchRole('contractor')">Listing Guidelines</a></li>
-          <li><a href="#" onclick="App.switchRole('contractor')">Safety Compliance</a></li>
-          <li><a href="#" onclick="App.switchRole('contractor')">Payout Schedules</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Governance</h4>
-        <ul>
-          <li><a href="#" onclick="App.switchRole('admin')">Super Admin Console</a></li>
-          <li><a href="#">Payment Security (PCI-DSS)</a></li>
-          <li><a href="#">Terms & Wilderness Waiver</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>&copy; 2026 WildVenture Adventure Technologies. Built for Internship Submission & Portfolio Showcase.</p>
-    </div>
-  </footer>
-
-  <!-- ================= MODAL: CAMPSITE DETAILS & BOOKING ================= -->
-  <div class="modal-overlay" id="campsite-detail-modal">
-    <div class="modal-dialog modal-lg">
+  <!-- ================= MODAL: ADD NEW CAMPSITE ================= -->
+  <div class="modal-overlay" id="add-campsite-modal">
+    <div class="modal-dialog">
       <div class="modal-header">
-        <div>
-          <h2 id="modal-camp-title">Campsite Title</h2>
-          <div class="text-muted small" id="modal-camp-location">Location</div>
+        <h3><i class="ph ph-plus-circle"></i> Publish New Campsite</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('add-campsite-modal').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label>Experience Title *</label><input type="text" id="new-camp-title" placeholder="e.g. Himalayan River Basecamp"></div>
+        <div class="form-group"><label>Location *</label><input type="text" id="new-camp-location" placeholder="e.g. Manali, Himachal Pradesh"></div>
+        <div class="date-inputs-row">
+          <div class="form-group"><label>Category</label><select id="new-camp-category"><option value="Glamping">Luxury Glamping</option><option value="Wild Camping">Wilderness & Alpine</option><option value="Riverside">Riverside & Rapids</option><option value="Survival Camps">Bushcraft Survival</option></select></div>
+          <div class="form-group"><label>Difficulty</label><select id="new-camp-difficulty"><option value="Easy">Easy</option><option value="Moderate">Moderate</option><option value="Challenging">Challenging</option><option value="Expert">Expert</option></select></div>
         </div>
+        <div class="date-inputs-row">
+          <div class="form-group"><label>Price Per Night (₹) *</label><input type="number" id="new-camp-price" placeholder="2500" value="2800"></div>
+          <div class="form-group"><label>Available Camper Slots</label><input type="number" id="new-camp-slots" value="15"></div>
+        </div>
+        <div class="form-group"><label>Cover Photo Image URL</label><input type="url" id="new-camp-image" placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1200&q=80"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="document.getElementById('add-campsite-modal').classList.remove('active')">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-campsite">Publish Listing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: CAMPSITE DETAILS / BOOKING ================= -->
+  <div class="modal-overlay" id="campsite-detail-modal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-header">
+        <div><h3 id="modal-camp-title">Campsite Details</h3><span class="text-muted small" id="modal-camp-location"></span></div>
         <button class="modal-close-btn" onclick="App.closeCampsiteModal()">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="camp-detail-grid">
-          <!-- Left Info Column -->
+        <div class="campsite-modal-layout">
           <div>
-            <div class="camp-hero-img-wrap">
-              <img src="" id="modal-camp-hero-img" alt="Campsite View">
-            </div>
-
-            <p id="modal-camp-tagline" class="bold" style="margin-bottom:1rem; font-size:1.05rem;"></p>
-
-            <div class="d-flex gap-2 flex-wrap" style="margin-bottom:1.5rem;">
+            <img id="modal-camp-hero-img" class="modal-camp-hero-img" src="" alt="Campsite">
+            <div class="modal-camp-copy"><p id="modal-camp-tagline"></p></div>
+            <div class="modal-spec-badges">
               <span class="badge badge-category"><i class="ph ph-gauge"></i> Difficulty: <strong id="modal-camp-difficulty"></strong></span>
               <span class="badge badge-category"><i class="ph ph-mountains"></i> Altitude: <strong id="modal-camp-altitude"></strong></span>
               <span class="badge badge-category"><i class="ph ph-sun"></i> Best Season: <strong id="modal-camp-season"></strong></span>
               <span class="badge badge-success"><i class="ph ph-users"></i> <strong id="modal-camp-slots"></strong></span>
             </div>
-
-            <h4 style="margin-bottom:0.75rem;"><i class="ph ph-shield-star text-success"></i> Verified Contractor & Guides</h4>
-            <div style="background:var(--bg-subtle); padding:1rem; border-radius:var(--radius-sm); margin-bottom:1.5rem;">
+            <h4><i class="ph ph-shield-star text-success"></i> Verified Contractor & Guides</h4>
+            <div style="background:var(--bg-subtle);padding:1rem;border-radius:var(--radius-sm);margin-bottom:1.5rem;">
               <strong id="modal-contractor-name">Contractor Name</strong><br>
-              <span class="small text-muted" id="modal-contractor-guide"></span> &bull; 
-              <span class="badge badge-success" id="modal-contractor-badge"></span><br>
+              <span class="small text-muted" id="modal-contractor-guide"></span> &bull; <span class="badge badge-success" id="modal-contractor-badge"></span><br>
               <span class="small text-muted"><i class="ph ph-phone"></i> Emergency Support: <span id="modal-contractor-phone"></span></span>
             </div>
-
-            <h4 style="margin-bottom:0.5rem;"><i class="ph ph-sparkle"></i> Included Amenities</h4>
+            <h4><i class="ph ph-sparkle"></i> Included Amenities</h4>
             <div class="amenities-grid" id="modal-camp-amenities"></div>
-
-            <h4 style="margin-bottom:0.5rem;"><i class="ph ph-map-pin"></i> Guided Expedition Itinerary</h4>
+            <h4><i class="ph ph-map-pin"></i> Guided Expedition Itinerary</h4>
             <div class="itinerary-list" id="modal-camp-itinerary"></div>
           </div>
-
-          <!-- Right Booking Widget Column -->
           <div>
             <div class="booking-widget-box">
-              <div class="booking-price-header">
-                <div>
-                  <span class="price-display" id="modal-camp-price">₹0</span>
-                  <span class="text-muted small">/ night / person</span>
-                </div>
-                <span class="badge badge-featured">Instant Confirmation</span>
-              </div>
-
-              <div class="form-group">
-                <label><i class="ph ph-user"></i> Primary Camper Name</label>
-                <input type="text" id="book-camper-name" placeholder="Full Name" value="Shashwat Sharma">
-              </div>
-
-              <div class="form-group">
-                <label><i class="ph ph-envelope"></i> Email Address</label>
-                <input type="email" id="book-camper-email" placeholder="email@example.com" value="shashwat@adventure.io">
-              </div>
-
-              <div class="form-group">
-                <label><i class="ph ph-phone"></i> Mobile Phone</label>
-                <input type="tel" id="book-camper-phone" placeholder="+91 98765 43210" value="+91 98765 12345">
-              </div>
-
-              <div class="date-inputs-row">
-                <div class="form-group">
-                  <label><i class="ph ph-calendar"></i> Check-in</label>
-                  <input type="date" id="book-checkin">
-                </div>
-                <div class="form-group">
-                  <label><i class="ph ph-calendar"></i> Check-out</label>
-                  <input type="date" id="book-checkout">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label><i class="ph ph-users"></i> Number of Campers</label>
-                <input type="number" id="book-campers-count" min="1" max="20" value="2">
-              </div>
-
-              <!-- Gear Rental Add-on selection -->
-              <div class="gear-addons-box">
-                <label><i class="ph ph-backpack"></i> Add Contractor Gear Rental:</label>
-                <div id="modal-gear-addons-list"></div>
-              </div>
-
-              <!-- Price Breakdown -->
+              <div class="booking-price-header"><div><span class="price-display" id="modal-camp-price">₹0</span><span class="text-muted small">/ night / person</span></div><span class="badge badge-featured">Instant Confirmation</span></div>
+              <div class="form-group"><label><i class="ph ph-user"></i> Primary Camper Name</label><input type="text" id="book-camper-name" placeholder="Full Name" value="Shashwat Sharma"></div>
+              <div class="form-group"><label><i class="ph ph-envelope"></i> Email Address</label><input type="email" id="book-camper-email" placeholder="email@example.com" value="shashwat@adventure.io"></div>
+              <div class="form-group"><label><i class="ph ph-phone"></i> Mobile Phone</label><input type="tel" id="book-camper-phone" placeholder="+91 98765 43210" value="+91 98765 12345"></div>
+              <div class="date-inputs-row"><div class="form-group"><label><i class="ph ph-calendar"></i> Check-in</label><input type="date" id="book-checkin"></div><div class="form-group"><label><i class="ph ph-calendar"></i> Check-out</label><input type="date" id="book-checkout"></div></div>
+              <div class="form-group"><label><i class="ph ph-users"></i> Number of Campers</label><input type="number" id="book-campers-count" min="1" max="20" value="2"></div>
+              <div class="gear-addons-box"><label><i class="ph ph-backpack"></i> Add Contractor Gear Rental:</label><div id="modal-gear-addons-list"></div></div>
               <div class="price-calc-breakdown">
-                <div class="price-calc-row">
-                  <span class="text-muted">Campsite Stay (<span id="book-calc-nights">1N</span> &bull; <span id="book-calc-campers">1P</span>):</span>
-                  <span id="book-calc-base">₹0</span>
-                </div>
-                <div class="price-calc-row">
-                  <span class="text-muted">Gear Add-ons:</span>
-                  <span id="book-calc-gear">₹0</span>
-                </div>
-                <div class="price-calc-row">
-                  <span class="text-muted">Forest Tax & Eco-Levy (5%):</span>
-                  <span id="book-calc-tax">₹0</span>
-                </div>
-                <div class="price-calc-row grand-total">
-                  <span>Estimated Total:</span>
-                  <span id="book-calc-total">₹0</span>
-                </div>
+                <div class="price-calc-row"><span class="text-muted">Campsite Stay (<span id="book-calc-nights">1N</span> &bull; <span id="book-calc-campers">1P</span>):</span><span id="book-calc-base">₹0</span></div>
+                <div class="price-calc-row"><span class="text-muted">Gear Add-ons:</span><span id="book-calc-gear">₹0</span></div>
+                <div class="price-calc-row"><span class="text-muted">Forest Tax & Eco-Levy (5%):</span><span id="book-calc-tax">₹0</span></div>
+                <div class="price-calc-row grand-total"><span>Estimated Total:</span><span id="book-calc-total">₹0</span></div>
               </div>
-
-              <button class="btn btn-accent btn-block" id="btn-proceed-to-pay" style="margin-top:1.25rem;">
-                <i class="ph ph-lock-key"></i> Proceed to Payment Gateway
-              </button>
-              <div class="text-center text-muted small" style="margin-top:0.5rem;">
-                <i class="ph ph-shield-check"></i> 256-Bit Encrypted Secure Checkout
-              </div>
+              <button class="btn btn-accent btn-block" id="btn-proceed-to-pay" style="margin-top:1.25rem;"><i class="ph ph-lock-key"></i> Proceed to Payment Gateway</button>
+              <div class="text-center text-muted small" style="margin-top:0.5rem;"><i class="ph ph-shield-check"></i> 256-Bit Encrypted Secure Checkout</div>
             </div>
           </div>
         </div>
@@ -603,181 +467,31 @@
   <div class="modal-overlay" id="payment-modal">
     <div class="modal-dialog modal-lg">
       <div class="modal-header">
-        <div>
-          <h3><i class="ph ph-shield-check text-success"></i> WildVenture Payment Gateway</h3>
-          <span class="text-muted small">Merchant ID: <code>WV-MERCHANT-2026</code> &bull; PCI-DSS Level 1</span>
-        </div>
+        <div><h3><i class="ph ph-shield-check text-success"></i> WildVenture Payment Gateway</h3><span class="text-muted small">Merchant ID: <code>WV-MERCHANT-2026</code> &bull; PCI-DSS Level 1</span></div>
         <button class="modal-close-btn" onclick="PaymentEngine.closeCheckout()">&times;</button>
       </div>
-
       <div class="modal-body">
         <div class="checkout-modal-layout">
-          
-          <!-- Left: Order Summary & Coupon -->
           <div class="checkout-summary-pane">
-            <h4 style="margin-bottom:1rem;"><i class="ph ph-receipt"></i> Booking Summary</h4>
-            <div style="margin-bottom:1rem;">
-              <strong id="summary-camp-title">Campsite Name</strong>
-              <div class="small text-muted" id="summary-dates">Dates</div>
-              <div class="small text-muted" id="summary-campers">Party Size</div>
+            <h4><i class="ph ph-receipt"></i> Booking Summary</h4>
+            <div style="margin-bottom:1rem;"><strong id="summary-camp-title">Campsite Name</strong><div class="small text-muted" id="summary-dates">Dates</div><div class="small text-muted" id="summary-campers">Party Size</div></div>
+            <div class="price-calc-breakdown" style="border-top:1px solid var(--border-color);padding-top:.75rem;">
+              <div class="price-calc-row"><span class="text-muted" id="summary-base-rate">Base Stay:</span><span id="summary-base-amount">₹0</span></div>
+              <div class="price-calc-row" id="summary-gear-row" style="display:none;"><span class="text-muted">Gear Rental Add-ons:</span><span id="summary-gear-amount">₹0</span></div>
+              <div class="price-calc-row" id="summary-discount-row" style="display:none;color:var(--color-success);"><span>Promo Discount:</span><span id="summary-discount-amount">-₹0</span></div>
+              <div class="price-calc-row"><span class="text-muted">Taxes & Wildlife Levy (5%):</span><span id="summary-tax-amount">₹0</span></div>
+              <div class="price-calc-row grand-total"><span>Amount Payable:</span><span id="summary-grand-total">₹0</span></div>
             </div>
-
-            <div class="price-calc-breakdown" style="border-top:1px solid var(--border-color); padding-top:0.75rem;">
-              <div class="price-calc-row">
-                <span class="text-muted" id="summary-base-rate">Base Stay:</span>
-                <span id="summary-base-amount">₹0</span>
-              </div>
-              <div class="price-calc-row" id="summary-gear-row" style="display:none;">
-                <span class="text-muted">Gear Rental Add-ons:</span>
-                <span id="summary-gear-amount">₹0</span>
-              </div>
-              <div class="price-calc-row" id="summary-discount-row" style="display:none; color:var(--color-success);">
-                <span>Promo Discount:</span>
-                <span id="summary-discount-amount">-₹0</span>
-              </div>
-              <div class="price-calc-row">
-                <span class="text-muted">Taxes & Wildlife Levy (5%):</span>
-                <span id="summary-tax-amount">₹0</span>
-              </div>
-              <div class="price-calc-row grand-total">
-                <span>Amount Payable:</span>
-                <span id="summary-grand-total">₹0</span>
-              </div>
-            </div>
-
-            <!-- Coupon Input -->
-            <div style="margin-top:1.5rem;">
-              <label class="small bold"><i class="ph ph-tag"></i> Have a Promo Code?</label>
-              <div class="coupon-input-group">
-                <input type="text" id="coupon-input" placeholder="e.g. ADVENTURE20" style="text-transform:uppercase;">
-                <button class="btn btn-outline btn-sm" id="btn-apply-coupon">Apply</button>
-              </div>
-              <div id="coupon-message" class="small" style="margin-top:0.35rem;"></div>
-              <div class="text-muted small" style="margin-top:0.5rem;">💡 Demo Coupons: <code>ADVENTURE20</code>, <code>WILD10</code></div>
-            </div>
+            <div style="margin-top:1.5rem;"><label class="small bold"><i class="ph ph-tag"></i> Have a Promo Code?</label><div class="coupon-input-group"><input type="text" id="coupon-input" placeholder="e.g. ADVENTURE20" style="text-transform:uppercase;"><button class="btn btn-outline btn-sm" id="btn-apply-coupon">Apply</button></div><div id="coupon-message" class="small" style="margin-top:.35rem;"></div><div class="text-muted small" style="margin-top:.5rem;">Demo Coupons: <code>ADVENTURE20</code>, <code>WILD10</code></div></div>
           </div>
-
-          <!-- Right: Payment Methods & Inputs -->
           <div>
-            <div class="payment-tabs">
-              <button class="payment-tab-btn active" data-method="card">
-                <i class="ph ph-credit-card"></i> Card
-              </button>
-              <button class="payment-tab-btn" data-method="upi">
-                <i class="ph ph-qr-code"></i> UPI / QR
-              </button>
-              <button class="payment-tab-btn" data-method="netbanking">
-                <i class="ph ph-bank"></i> NetBanking
-              </button>
-              <button class="payment-tab-btn" data-method="wallet">
-                <i class="ph ph-wallet"></i> Digital Pay
-              </button>
-            </div>
-
-            <!-- TAB 1: CARD PAYMENT -->
-            <div class="payment-method-panel active" id="pay-panel-card">
-              <!-- 3D Interactive Card Preview -->
-              <div class="card-preview-wrapper">
-                <div class="interactive-card" id="interactive-card">
-                  <div class="card-front">
-                    <div class="d-flex justify-between align-center">
-                      <div class="card-chip"></div>
-                      <span id="card-type-icon" class="bold" style="font-size:0.9rem;"><i class="ph ph-credit-card"></i> Visa</span>
-                    </div>
-                    <div class="card-number-display" id="card-preview-number">•••• •••• •••• ••••</div>
-                    <div class="card-bottom-row">
-                      <div>
-                        <div style="font-size:0.65rem; opacity:0.8;">CARDHOLDER</div>
-                        <div id="card-preview-name" class="bold">YOUR FULL NAME</div>
-                      </div>
-                      <div>
-                        <div style="font-size:0.65rem; opacity:0.8;">EXPIRES</div>
-                        <div id="card-preview-exp" class="bold">MM/YY</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-back">
-                    <div class="card-back-stripe"></div>
-                    <div class="card-cvv-box">
-                      <span id="card-preview-cvv">•••</span>
-                    </div>
-                    <div style="padding:0 1.5rem; font-size:0.65rem; opacity:0.7; text-align:center;">
-                      Electronic Camping Authorization Pass &bull; WildVenture
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card Form Inputs -->
-              <div class="form-group">
-                <label>Card Number</label>
-                <input type="text" id="pay-card-number" placeholder="4532 8900 1234 5678" maxlength="19" value="4532 8821 9012 4242">
-              </div>
-              <div class="form-group">
-                <label>Cardholder Name</label>
-                <input type="text" id="pay-card-name" placeholder="Name on Card" value="SHASHWAT SHARMA">
-              </div>
-              <div class="date-inputs-row">
-                <div class="form-group">
-                  <label>Expiry (MM/YY)</label>
-                  <input type="text" id="pay-card-exp" placeholder="12/28" maxlength="5" value="09/28">
-                </div>
-                <div class="form-group">
-                  <label>CVV / CVC</label>
-                  <input type="password" id="pay-card-cvv" placeholder="123" maxlength="4" value="882">
-                </div>
-              </div>
-            </div>
-
-            <!-- TAB 2: UPI / QR CODE -->
-            <div class="payment-method-panel" id="pay-panel-upi">
-              <div class="upi-qr-box">
-                <p class="bold" style="margin-bottom:0.5rem;">Scan to Pay with Any UPI App</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=wildventure@gateway&pn=WildVentureCamping&cu=INR" class="upi-qr-img" alt="UPI QR Code">
-                <div class="upi-timer">
-                  <i class="ph ph-clock"></i> QR expires in: <span id="qr-countdown">05:00</span>
-                </div>
-                <div class="bold text-success" style="margin-top:0.5rem;" id="upi-amount-display">₹0</div>
-              </div>
-              <div class="form-group">
-                <label>Or enter UPI VPA ID:</label>
-                <input type="text" id="pay-upi-id" placeholder="username@okhdfcbank" value="camper@upi">
-              </div>
-            </div>
-
-            <!-- TAB 3: NET BANKING -->
-            <div class="payment-method-panel" id="pay-panel-netbanking">
-              <div class="form-group">
-                <label>Select Your Bank</label>
-                <select id="pay-bank-select">
-                  <option value="hdfc">HDFC Bank</option>
-                  <option value="icici">ICICI Bank</option>
-                  <option value="sbi">State Bank of India</option>
-                  <option value="axis">Axis Bank</option>
-                  <option value="kotak">Kotak Mahindra</option>
-                </select>
-              </div>
-              <p class="small text-muted">You will be securely redirected to your bank's portal for two-factor authentication.</p>
-            </div>
-
-            <!-- TAB 4: WALLET / DIGITAL PAY -->
-            <div class="payment-method-panel" id="pay-panel-wallet">
-              <div class="d-flex gap-2 flex-column" style="margin:1rem 0;">
-                <button class="btn btn-outline btn-block" onclick="showToast('Apple Pay Authorization Ready', 'info')">
-                  <i class="ph ph-apple-logo"></i> Apple Pay One-Touch
-                </button>
-                <button class="btn btn-outline btn-block" onclick="showToast('Google Pay Authorization Ready', 'info')">
-                  <i class="ph ph-google-logo"></i> Google Pay
-                </button>
-              </div>
-            </div>
-
-            <!-- Main Pay Button -->
-            <button class="btn btn-primary btn-block" id="btn-process-payment" style="margin-top:1.5rem; font-size:1.05rem; padding:0.9rem;">
-              <i class="ph ph-lock-key"></i> <span id="btn-pay-amount-label">Pay Now</span>
-            </button>
+            <div class="payment-tabs"><button class="payment-tab-btn active" data-method="card"><i class="ph ph-credit-card"></i> Card</button><button class="payment-tab-btn" data-method="upi"><i class="ph ph-qr-code"></i> UPI / QR</button><button class="payment-tab-btn" data-method="netbanking"><i class="ph ph-bank"></i> NetBanking</button><button class="payment-tab-btn" data-method="wallet"><i class="ph ph-wallet"></i> Digital Pay</button></div>
+            <div class="payment-method-panel active" id="pay-panel-card"><div class="card-preview-wrapper"><div class="interactive-card" id="interactive-card"><div class="card-front"><div class="d-flex justify-between align-center"><div class="card-chip"></div><span id="card-type-icon" class="bold"><i class="ph ph-credit-card"></i> Visa</span></div><div class="card-number-display" id="card-preview-number">•••• •••• •••• ••••</div><div class="card-bottom-row"><div><div style="font-size:.65rem;opacity:.8;">CARDHOLDER</div><div id="card-preview-name" class="bold">YOUR FULL NAME</div></div><div><div style="font-size:.65rem;opacity:.8;">EXPIRES</div><div id="card-preview-exp" class="bold">MM/YY</div></div></div></div><div class="card-back"><div class="card-back-stripe"></div><div class="card-cvv-box"><span id="card-preview-cvv">•••</span></div><div style="padding:0 1.5rem;font-size:.65rem;opacity:.7;text-align:center;">Electronic Camping Authorization Pass &bull; WildVenture</div></div></div></div><div class="form-group"><label>Card Number</label><input type="text" id="pay-card-number" placeholder="4532 8900 1234 5678" maxlength="19" value="4532 8821 9012 4242"></div><div class="form-group"><label>Cardholder Name</label><input type="text" id="pay-card-name" placeholder="Name on Card" value="SHASHWAT SHARMA"></div><div class="date-inputs-row"><div class="form-group"><label>Expiry (MM/YY)</label><input type="text" id="pay-card-exp" placeholder="12/28" maxlength="5" value="09/28"></div><div class="form-group"><label>CVV / CVC</label><input type="password" id="pay-card-cvv" placeholder="123" maxlength="4" value="882"></div></div></div>
+            <div class="payment-method-panel" id="pay-panel-upi"><div class="upi-qr-box"><p class="bold">Scan to Pay with Any UPI App</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=wildventure@gateway&pn=WildVentureCamping&cu=INR" class="upi-qr-img" alt="UPI QR Code"><div class="upi-timer"><i class="ph ph-clock"></i> QR expires in: <span id="qr-countdown">05:00</span></div><div class="bold text-success" id="upi-amount-display">₹0</div></div><div class="form-group"><label>Or enter UPI VPA ID:</label><input type="text" id="pay-upi-id" placeholder="username@okhdfcbank" value="camper@upi"></div></div>
+            <div class="payment-method-panel" id="pay-panel-netbanking"><div class="form-group"><label>Select Your Bank</label><select id="pay-bank-select"><option value="hdfc">HDFC Bank</option><option value="icici">ICICI Bank</option><option value="sbi">State Bank of India</option><option value="axis">Axis Bank</option><option value="kotak">Kotak Mahindra</option></select></div><p class="small text-muted">You will be securely redirected to your bank's portal for two-factor authentication.</p></div>
+            <div class="payment-method-panel" id="pay-panel-wallet"><div class="d-flex gap-2 flex-column" style="margin:1rem 0;"><button class="btn btn-outline btn-block" onclick="showToast('Apple Pay Authorization Ready','info')"><i class="ph ph-apple-logo"></i> Apple Pay One-Touch</button><button class="btn btn-outline btn-block" onclick="showToast('Google Pay Authorization Ready','info')"><i class="ph ph-google-logo"></i> Google Pay</button></div></div>
+            <button class="btn btn-primary btn-block" id="btn-process-payment" style="margin-top:1.5rem;font-size:1.05rem;padding:.9rem;"><i class="ph ph-lock-key"></i> <span id="btn-pay-amount-label">Pay Now</span></button>
           </div>
-
         </div>
       </div>
     </div>
@@ -786,148 +500,17 @@
   <!-- ================= MODAL: 3D SECURE OTP SIMULATOR ================= -->
   <div class="modal-overlay" id="otp-modal">
     <div class="modal-dialog" style="max-width:440px;">
-      <div class="modal-header">
-        <h3><i class="ph ph-shield-check text-success"></i> 3D-Secure Verification</h3>
-      </div>
-      <div class="modal-body text-center">
-        <p class="text-muted small" style="margin-bottom:1.25rem;">
-          A one-time verification code (OTP) was sent to your registered mobile ending in <strong>•••• ••<span id="otp-phone-last4">2345</span></strong>.
-        </p>
-
-        <div class="form-group" style="max-width:240px; margin:0 auto 1.25rem;">
-          <input type="text" id="otp-input" value="123456" maxlength="6" style="text-align:center; font-size:1.5rem; letter-spacing:6px; font-weight:bold;">
-        </div>
-        <div class="small text-muted" style="margin-bottom:1.5rem;">
-          (Demo OTP prefilled: <code>123456</code>)
-        </div>
-
-        <button class="btn btn-primary btn-block" id="btn-verify-otp">
-          Verify & Complete Booking
-        </button>
-      </div>
+      <div class="modal-header"><h3><i class="ph ph-shield-check text-success"></i> 3D-Secure Verification</h3></div>
+      <div class="modal-body text-center"><p class="text-muted small">A one-time verification code (OTP) was sent to your registered mobile ending in <strong>•••• ••<span id="otp-phone-last4"></span></strong>.</p><div class="form-group"><label>Enter OTP</label><input type="text" id="otp-input" inputmode="numeric" maxlength="6" placeholder="123456" value="123456"></div><button class="btn btn-primary btn-block" id="btn-verify-otp">Verify & Complete Booking</button></div>
     </div>
   </div>
 
-  <!-- ================= MODAL: SUCCESS & PRINTABLE TICKET ================= -->
+  <!-- ================= MODAL: SUCCESS DIGITAL PASS ================= -->
   <div class="modal-overlay" id="success-ticket-modal">
-    <div class="modal-dialog" style="max-width:650px;">
-      <div class="modal-header">
-        <div>
-          <h3><i class="ph ph-check-circle text-success"></i> Booking & Payment Confirmed!</h3>
-          <span class="text-muted small">Your adventure is officially locked in</span>
-        </div>
-        <button class="modal-close-btn" onclick="document.getElementById('success-ticket-modal').classList.remove('active'); document.body.style.overflow='auto';">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <div style="background:var(--bg-subtle); border:2px dashed var(--border-color); border-radius:var(--radius-md); padding:1.5rem;">
-          
-          <div class="d-flex justify-between align-center" style="margin-bottom:1rem; border-bottom:1px solid var(--border-color); padding-bottom:0.75rem;">
-            <div>
-              <span class="badge badge-success">Official Entry Pass</span>
-              <h3 id="ticket-camp-title" style="margin-top:0.25rem;">Pine Ridge Haven</h3>
-            </div>
-            <div class="text-right">
-              <span class="small text-muted">Pass ID</span>
-              <div class="bold" id="ticket-booking-id" style="font-family:monospace; font-size:1.1rem; color:var(--color-primary);">WV-00000</div>
-            </div>
-          </div>
-
-          <div class="ticket-grid" style="margin-bottom:1rem;">
-            <div>
-              <span class="ticket-label">Camper</span>
-              <span class="ticket-val" id="ticket-customer-name">Camper Name</span>
-            </div>
-            <div>
-              <span class="ticket-label">Expedition Dates</span>
-              <span class="ticket-val" id="ticket-dates">Dates</span>
-            </div>
-            <div>
-              <span class="ticket-label">Party Size</span>
-              <span class="ticket-val" id="ticket-campers">2 Campers</span>
-            </div>
-            <div>
-              <span class="ticket-label">Total Paid</span>
-              <span class="ticket-val text-success" id="ticket-amount">₹0</span>
-            </div>
-          </div>
-
-          <div style="display:flex; justify-content:space-between; align-items:center; background:#fff; padding:1rem; border-radius:var(--radius-sm);">
-            <div>
-              <div class="small text-muted">Contractor: <strong id="ticket-contractor">Himalayan Ridge</strong></div>
-              <div class="small text-muted">Gateway Txn: <code id="ticket-txnid">TXN-000000</code></div>
-              <div class="small text-muted">Method: <span id="ticket-payment-method">Card</span></div>
-            </div>
-            <img src="" id="ticket-qr-code" style="width:90px; height:90px; border:1px solid var(--border-color); border-radius:4px;" alt="Checkin QR">
-          </div>
-
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-outline" onclick="window.print()"><i class="ph ph-printer"></i> Print / Save PDF</button>
-        <button class="btn btn-primary" onclick="document.getElementById('success-ticket-modal').classList.remove('active'); document.body.style.overflow='auto'; App.switchRole('user'); document.getElementById('user-bookings-section')?.scrollIntoView({behavior:'smooth'})">
-          View in My Bookings
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= MODAL: CONTRACTOR ADD CAMPSITE ================= -->
-  <div class="modal-overlay" id="add-campsite-modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3><i class="ph ph-plus-circle"></i> Add New Campsite or Expedition</h3>
-        <button class="modal-close-btn" onclick="document.getElementById('add-campsite-modal').classList.remove('active')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Campsite / Tour Title *</label>
-          <input type="text" id="new-camp-title" placeholder="e.g. Spiti Valley High Pass Camp">
-        </div>
-        <div class="form-group">
-          <label>Location & State *</label>
-          <input type="text" id="new-camp-location" placeholder="e.g. Kaza, Spiti, Himachal Pradesh">
-        </div>
-        <div class="date-inputs-row">
-          <div class="form-group">
-            <label>Category</label>
-            <select id="new-camp-category">
-              <option value="wild">Wilderness & Trek</option>
-              <option value="glamping">Luxury Glamping</option>
-              <option value="riverside">Riverside Camp</option>
-              <option value="survival">Bushcraft Survival</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Difficulty</label>
-            <select id="new-camp-difficulty">
-              <option value="Easy">Easy</option>
-              <option value="Moderate">Moderate</option>
-              <option value="Challenging">Challenging</option>
-              <option value="Expert">Expert</option>
-            </select>
-          </div>
-        </div>
-        <div class="date-inputs-row">
-          <div class="form-group">
-            <label>Price Per Night (₹) *</label>
-            <input type="number" id="new-camp-price" placeholder="2500" value="2800">
-          </div>
-          <div class="form-group">
-            <label>Available Camper Slots</label>
-            <input type="number" id="new-camp-slots" value="15">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Cover Photo Image URL</label>
-          <input type="url" id="new-camp-image" placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1200&q=80">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline" onclick="document.getElementById('add-campsite-modal').classList.remove('active')">Cancel</button>
-        <button class="btn btn-primary" id="btn-save-campsite">Publish Listing</button>
-      </div>
+    <div class="modal-dialog" style="max-width:760px;">
+      <div class="modal-header"><div><h3><i class="ph-fill ph-check-circle text-success"></i> Booking Confirmed</h3><span class="text-muted small">Your WildVenture digital adventure pass</span></div><button class="modal-close-btn" onclick="document.getElementById('success-ticket-modal').classList.remove('active');document.body.style.overflow='auto'">&times;</button></div>
+      <div class="modal-body"><div class="booking-ticket-card"><div class="ticket-left"><div class="ticket-header"><span class="ticket-id" id="ticket-booking-id">WV-00000</span><span class="badge badge-success">Confirmed</span></div><h3 class="ticket-camp-title" id="ticket-camp-title">Adventure</h3><div class="ticket-grid"><div><span class="ticket-label">Camper Name</span><span class="ticket-val" id="ticket-customer-name">Camper</span></div><div><span class="ticket-label">Dates</span><span class="ticket-val" id="ticket-dates">Dates</span></div><div><span class="ticket-label">Party Size</span><span class="ticket-val" id="ticket-campers">2 Campers</span></div><div><span class="ticket-label">Contractor</span><span class="ticket-val" id="ticket-contractor">WildVenture</span></div><div><span class="ticket-label">Payment</span><span class="ticket-val" id="ticket-payment-method">Payment</span></div><div><span class="ticket-label">Amount</span><span class="ticket-val" id="ticket-amount">₹0</span></div><div><span class="ticket-label">Transaction ID</span><span class="ticket-val" id="ticket-txnid">TXN-000000</span></div></div></div><div class="ticket-right"><img id="ticket-qr-code" class="qr-thumb" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=WILDVENTURE" alt="QR Pass"><span class="qr-text">Scan for Check-in</span><button class="btn btn-sm btn-outline" onclick="window.print()"><i class="ph ph-printer"></i> Print Pass</button></div></div></div>
+      <div class="modal-footer"><button class="btn btn-primary" onclick="document.getElementById('success-ticket-modal').classList.remove('active');document.body.style.overflow='auto';document.getElementById('user-bookings-section')?.scrollIntoView({behavior:'smooth'})">View My Bookings</button></div>
     </div>
   </div>
 
