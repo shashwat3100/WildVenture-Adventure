@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourist Packages | WildVenture</title>
+  <meta name="description" content="Explore curated Maharashtra and Central India tourist packages from WildVenture.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/packages.css">
+</head>
+<body class="tourist-packages-page">
+  <div class="top-role-bar"><div class="container top-role-bar-inner"><div><span class="badge badge-user"><i class="ph ph-compass"></i> Camper Explorer Mode</span><span class="text-muted small d-none-mobile"> | WildVenture Tourist Packages</span></div></div></div>
+  <header class="site-header"><div class="container header-inner">
+    <a href="index.html" class="brand-logo"><i class="ph ph-campfire"></i><span>WildVenture</span></a>
+    <nav class="main-nav" id="main-nav-menu">
+      <a href="index.html#campsites-section" class="nav-link">Campsites & Treks</a>
+      <a href="tourist-packages.html" class="nav-link">Tourist Packages</a>
+      <a href="index.html#gear-section" class="nav-link">Gear Rental</a>
+      <a href="index.html#user-bookings-section" class="nav-link">My Bookings</a>
+    </nav>
+    <div class="header-actions"><a href="index.html" class="btn btn-outline btn-sm"><i class="ph ph-arrow-left"></i> Back to WildVenture</a></div>
+  </div></header>
+
+  <main>
+    <section class="packages-hero"><div class="container">
+      <span class="section-tag"><i class="ph ph-map-trifold"></i> Curated India Escapes</span>
+      <h1>Tourist Packages Built For Your Next Adventure.</h1>
+      <p>Explore wildlife reserves, Sahyadri hills, Konkan coastlines and unique natural landmarks with ready-to-book WildVenture packages.</p>
+    </div></section>
+
+    <section class="container">
+      <div class="packages-toolbar">
+        <div><span class="section-tag"><i class="ph ph-compass"></i> Tourist Packages</span><h2 class="section-title" style="margin-top:.4rem;">Choose Your Escape</h2></div>
+        <div class="packages-search"><input id="package-search" type="search" placeholder="Search package, destination or activity..." aria-label="Search tourist packages"></div>
+        <span class="bold small text-muted" id="packages-results-count">10 packages available</span>
+      </div>
+      <div class="package-grid" id="tourist-packages-grid"></div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="tourist-package-modal" onclick="if(event.target===this) TouristPackages.closeDetails()">
+    <div class="modal-dialog package-modal-content">
+      <div class="modal-header"><h3><i class="ph ph-compass"></i> Package Details</h3><button class="modal-close-btn" onclick="TouristPackages.closeDetails()">&times;</button></div>
+      <div class="modal-body" id="package-detail-content"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/payment.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/packages.js"></script>
+</body>
+</html>
