@@ -759,3 +759,6 @@ DataStore.init();
 // Expose globally
 window.DataStore = DataStore;
 window.DB = DB;
+
+// DataStore v2.6 Ready
+
