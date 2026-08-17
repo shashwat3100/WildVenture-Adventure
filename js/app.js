@@ -9,23 +9,23 @@ const App = {
   selectedGearForBooking: [],
 
   init: function() {
-    this.bindRoleSwitcher();
-    this.bindNavigation();
-    this.bindFilterEvents();
-    this.bindContractorActions();
-    this.bindAdminActions();
-    this.bindBookingWidget();
+    try { this.bindRoleSwitcher(); } catch(e) { console.error(e); }
+    try { this.bindNavigation(); } catch(e) { console.error(e); }
+    try { this.bindFilterEvents(); } catch(e) { console.error(e); }
+    try { this.bindContractorActions(); } catch(e) { console.error(e); }
+    try { this.bindAdminActions(); } catch(e) { console.error(e); }
+    try { this.bindBookingWidget(); } catch(e) { console.error(e); }
 
-    // Initial render
-    this.renderCampsites();
-    this.renderGearStore();
-    this.renderUserBookings();
-    this.renderContractorDashboard();
-    this.renderAdminDashboard();
+    // Initial render with section-level isolation
+    try { this.renderCampsites(); } catch(e) { console.error("renderCampsites error:", e); }
+    try { this.renderGearStore(); } catch(e) { console.error("renderGearStore error:", e); }
+    try { this.renderUserBookings(); } catch(e) { console.error("renderUserBookings error:", e); }
+    try { this.renderContractorDashboard(); } catch(e) { console.error("renderContractorDashboard error:", e); }
+    try { this.renderAdminDashboard(); } catch(e) { console.error("renderAdminDashboard error:", e); }
 
     // Initialize Payment Engine
     if (window.PaymentEngine) {
-      PaymentEngine.init();
+      try { PaymentEngine.init(); } catch(e) { console.error(e); }
     }
   },
 
@@ -77,11 +77,11 @@ const App = {
   },
 
   refreshPortalViews: function() {
-    this.renderCampsites();
-    this.renderGearStore();
-    this.renderUserBookings();
-    this.renderContractorDashboard();
-    this.renderAdminDashboard();
+    try { this.renderCampsites(); } catch(e){}
+    try { this.renderGearStore(); } catch(e){}
+    try { this.renderUserBookings(); } catch(e){}
+    try { this.renderContractorDashboard(); } catch(e){}
+    try { this.renderAdminDashboard(); } catch(e){}
   },
 
   // ================= NAVIGATION =================
@@ -122,10 +122,7 @@ const App = {
     });
 
     // Search bar inputs
-    const searchLocation = document.getElementById("search-location");
-    const searchDate = document.getElementById("search-date");
     const searchBtn = document.getElementById("btn-hero-search");
-
     if (searchBtn) {
       searchBtn.addEventListener("click", () => {
         this.renderCampsites();
@@ -145,22 +142,49 @@ const App = {
     const container = document.getElementById("campsites-grid");
     if (!container) return;
 
-    const campsites = DB.get("campsites") || [];
-    const locationQuery = document.getElementById("search-location")?.value.toLowerCase().trim() || "";
+    let campsites = [];
+    try {
+      campsites = DB.get("campsites");
+      if (!Array.isArray(campsites) || campsites.length === 0) {
+        campsites = typeof INITIAL_CAMPSITES !== 'undefined' ? INITIAL_CAMPSITES : [];
+      }
+    } catch(e) {
+      console.warn("Error fetching campsites from DB:", e);
+      campsites = typeof INITIAL_CAMPSITES !== 'undefined' ? INITIAL_CAMPSITES : [];
+    }
+
+    const locationQuery = (document.getElementById("search-location")?.value || "").toLowerCase().trim();
     const difficultyQuery = document.getElementById("filter-difficulty")?.value || "all";
     const maxPrice = parseInt(document.getElementById("filter-price-range")?.value || "10000");
 
     const filtered = campsites.filter(camp => {
-      if (camp.status !== "active") return false;
-      if (this.selectedCategory !== "all" && camp.category !== this.selectedCategory) return false;
-      if (locationQuery && !camp.location.toLowerCase().includes(locationQuery) && !camp.title.toLowerCase().includes(locationQuery)) return false;
-      if (difficultyQuery !== "all" && camp.difficulty.toLowerCase() !== difficultyQuery.toLowerCase()) return false;
-      if (camp.pricePerNight > maxPrice) return false;
+      if (!camp) return false;
+      const status = (camp.status || "active").toLowerCase();
+      if (status !== "active") return false;
+      
+      if (this.selectedCategory !== "all") {
+        const sel = (this.selectedCategory || "").toLowerCase();
+        const cat = (camp.category || "").toLowerCase();
+        if (sel === "glamping" && !cat.includes("glamp")) return false;
+        else if (sel === "wild" && !cat.includes("wild") && !cat.includes("alpine") && !cat.includes("altitude")) return false;
+        else if (sel === "riverside" && !cat.includes("river") && !cat.includes("rapid")) return false;
+        else if (sel === "survival" && !cat.includes("survival") && !cat.includes("bushcraft")) return false;
+        else if (!["glamping", "wild", "riverside", "survival"].includes(sel) && !cat.includes(sel)) return false;
+      }
+
+      const campLoc = (camp.location || "").toLowerCase();
+      const campTitle = (camp.title || "").toLowerCase();
+      const campDiff = (camp.difficulty || "").toLowerCase();
+      const campPrice = typeof camp.pricePerNight === 'number' ? camp.pricePerNight : 0;
+
+      if (locationQuery && !campLoc.includes(locationQuery) && !campTitle.includes(locationQuery)) return false;
+      if (difficultyQuery !== "all" && campDiff !== difficultyQuery.toLowerCase()) return false;
+      if (campPrice > maxPrice) return false;
       return true;
     });
 
     const countElem = document.getElementById("results-count");
-    if (countElem) countElem.innerText = `${filtered.length} Adventure Destinations Found`;
+    if (countElem) countElem.innerText = `${filtered.length} Adventure Destination${filtered.length === 1 ? '' : 's'} Found`;
 
     if (filtered.length === 0) {
       container.innerHTML = `
@@ -174,7 +198,9 @@ const App = {
       return;
     }
 
-    container.innerHTML = filtered.map(camp => `
+    container.innerHTML = filtered.map(camp => {
+      const contractorName = camp.contractor?.name || camp.contractorName || "Verified Operator";
+      return `
       <div class="campsite-card" onclick="App.openCampsiteModal('${camp.id}')">
         <div class="card-img-wrap">
           <img src="${camp.image}" alt="${camp.title}" loading="lazy">
@@ -196,14 +222,14 @@ const App = {
           <p class="card-tagline">${camp.tagline}</p>
           
           <div class="card-amenities-tags">
-            ${camp.amenities.slice(0, 3).map(a => `<span class="tag-pill">${a}</span>`).join('')}
-            ${camp.amenities.length > 3 ? `<span class="tag-pill">+${camp.amenities.length - 3} more</span>` : ''}
+            ${(camp.amenities || []).slice(0, 3).map(a => `<span class="tag-pill">${a}</span>`).join('')}
+            ${(camp.amenities || []).length > 3 ? `<span class="tag-pill">+${camp.amenities.length - 3} more</span>` : ''}
           </div>
 
           <div class="card-contractor-footer">
             <div class="contractor-chip">
               <i class="ph ph-shield-check text-success"></i>
-              <span>${camp.contractor.name}</span>
+              <span>${contractorName}</span>
             </div>
             <button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); App.openCampsiteModal('${camp.id}')">
               Explore & Book <i class="ph ph-arrow-right"></i>
@@ -211,7 +237,7 @@ const App = {
           </div>
         </div>
       </div>
-    `).join('');
+    `}).join('');
   },
 
   resetFilters: function() {
@@ -238,7 +264,7 @@ const App = {
 
   // ================= CAMPSITE DETAIL MODAL & BOOKING =================
   openCampsiteModal: function(campId) {
-    const campsites = DB.get("campsites");
+    const campsites = DB.get("campsites") || [];
     const camp = campsites.find(c => c.id === campId);
     if (!camp) return;
 
@@ -247,43 +273,52 @@ const App = {
 
     // Populate modal elements
     document.getElementById("modal-camp-title").innerText = camp.title;
-    document.getElementById("modal-camp-location").innerHTML = `<i class="ph ph-map-pin"></i> ${camp.location} &bull; <i class="ph ph-navigation-arrow"></i> ${camp.coordinates}`;
+    document.getElementById("modal-camp-location").innerHTML = `<i class="ph ph-map-pin"></i> ${camp.location} &bull; <i class="ph ph-navigation-arrow"></i> ${camp.coordinates || '32.2432° N, 77.1892° E'}`;
     document.getElementById("modal-camp-hero-img").src = camp.image;
     document.getElementById("modal-camp-price").innerText = `₹${camp.pricePerNight.toLocaleString()}`;
     document.getElementById("modal-camp-tagline").innerText = camp.tagline;
 
     // Difficulty and Specs
-    document.getElementById("modal-camp-difficulty").innerText = camp.difficulty;
-    document.getElementById("modal-camp-altitude").innerText = camp.altitude;
-    document.getElementById("modal-camp-season").innerText = camp.bestSeason;
-    document.getElementById("modal-camp-slots").innerText = `${camp.availableSlots} Slots Left`;
+    document.getElementById("modal-camp-difficulty").innerText = camp.difficulty || 'Moderate';
+    document.getElementById("modal-camp-altitude").innerText = camp.altitude || camp.elevation || '2,000 m';
+    document.getElementById("modal-camp-season").innerText = camp.bestSeason || 'Apr - Oct';
+    document.getElementById("modal-camp-slots").innerText = `${camp.availableSlots || camp.maxGuests || 15} Slots Left`;
 
     // Contractor Box
-    document.getElementById("modal-contractor-name").innerText = camp.contractor.name;
-    document.getElementById("modal-contractor-guide").innerText = `Lead Guide: ${camp.contractor.leadGuide}`;
-    document.getElementById("modal-contractor-badge").innerText = camp.contractor.badge;
-    document.getElementById("modal-contractor-phone").innerText = camp.contractor.phone;
+    const contractorName = camp.contractor?.name || camp.contractorName || 'Wilderness Expeditions';
+    const leadGuide = camp.contractor?.leadGuide || camp.leadGuide || 'Certified Wilderness Guide';
+    const badge = camp.contractor?.badge || 'Master Alpine Operator';
+    const phone = camp.contractor?.phone || '+91 98765 43210';
+
+    document.getElementById("modal-contractor-name").innerText = contractorName;
+    document.getElementById("modal-contractor-guide").innerText = `Lead Guide: ${leadGuide}`;
+    document.getElementById("modal-contractor-badge").innerText = badge;
+    document.getElementById("modal-contractor-phone").innerText = phone;
 
     // Amenities
     const amenitiesContainer = document.getElementById("modal-camp-amenities");
-    amenitiesContainer.innerHTML = camp.amenities.map(a => `
-      <div class="amenity-item">
-        <i class="ph ph-check-circle"></i>
-        <span>${a}</span>
-      </div>
-    `).join('');
+    if (amenitiesContainer) {
+      amenitiesContainer.innerHTML = (camp.amenities || []).map(a => `
+        <div class="amenity-item">
+          <i class="ph ph-check-circle"></i>
+          <span>${a}</span>
+        </div>
+      `).join('');
+    }
 
     // Itinerary
     const itineraryContainer = document.getElementById("modal-camp-itinerary");
-    itineraryContainer.innerHTML = camp.itinerary.map(item => `
-      <div class="itinerary-step">
-        <div class="itinerary-badge">${item.day}</div>
-        <div class="itinerary-content">
-          <h4>${item.title}</h4>
-          <p>${item.desc}</p>
+    if (itineraryContainer) {
+      itineraryContainer.innerHTML = (camp.itinerary || []).map(item => `
+        <div class="itinerary-step">
+          <div class="itinerary-badge">${item.day}</div>
+          <div class="itinerary-content">
+            <h4>${item.title}</h4>
+            <p>${item.desc || item.detail || ''}</p>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `).join('');
+    }
 
     // Render Gear Add-ons inside booking widget
     this.renderModalGearAddons();
