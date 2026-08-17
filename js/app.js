@@ -1,6 +1,24 @@
-// ==========================================================================
-// WildVenture Adventure Camping Platform - Main Application Controller
-// ==========================================================================
+// Ensure DB is defined even if window.DB loading is deferred
+if (typeof DB === "undefined") {
+  var DB = window.DB || {
+    get: function(key) {
+      if (typeof window.DB !== 'undefined' && window.DB.get) return window.DB.get(key);
+      if (typeof DataStore !== 'undefined' && DataStore.getCampsites) {
+        if (key === "campsites") return DataStore.getCampsites();
+        if (key === "gear" || key === "gearCatalog") return DataStore.getGear();
+        if (key === "bookings") return DataStore.getBookings();
+      }
+      if (key === "campsites") return typeof INITIAL_CAMPSITES !== 'undefined' ? INITIAL_CAMPSITES : [];
+      if (key === "gear" || key === "gearCatalog") return typeof INITIAL_GEAR !== 'undefined' ? INITIAL_GEAR : [];
+      if (key === "bookings") return typeof INITIAL_BOOKINGS !== 'undefined' ? INITIAL_BOOKINGS : [];
+      return [];
+    },
+    set: function(key, val) {
+      if (typeof window.DB !== 'undefined' && window.DB.set) return window.DB.set(key, val);
+    },
+    reset: function() {}
+  };
+}
 
 const App = {
   currentRole: "user", // "user" | "contractor" | "admin"

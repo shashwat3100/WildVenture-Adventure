@@ -668,7 +668,7 @@ class DataStore {
 }
 
 // Global Database API Interface wrapper
-const DB = {
+var DB = window.DB = {
   get: function(key) {
     if (!key) return [];
     const norm = key.toLowerCase();
